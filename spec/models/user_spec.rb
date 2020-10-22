@@ -14,6 +14,26 @@ describe User do
         @user.password_confirmation = "000000"
         expect(@user).to be_valid
       end
+      it "パスワードが英数混合であれば登録できる" do
+        @user.password = "aaa000"
+        expect(@user).to be_valid
+      end
+      it "last_nameが全角かな文字であれば登録できる" do
+        @user.last_name = "あああ"
+        expect(@user).to be_valid
+      end
+      it "first_nameが全角かな文字であれば登録できる" do
+        @user.last_name = "あああ"
+        expect(@user).to be_valid
+      end
+      it "last_name_kanaが半角カナであれば登録できる" do
+        @user.last_name = "アアア"
+        expect(@user).to be_valid
+      end
+      it "first_name_kanaが半角カナであれば登録できる" do
+        @user.last_name = "アアア"
+        expect(@user).to be_valid
+      end
     end
 
     context '新規登録がうまくいかないとき' do
@@ -70,7 +90,7 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
-      it "bitth_dateが空だと登録できない" do
+      it "birth_dateが空だと登録できない" do
         @user.birth_date = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
