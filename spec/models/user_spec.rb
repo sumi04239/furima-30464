@@ -14,28 +14,8 @@ describe User do
         @user.password_confirmation = "000000"
         expect(@user).to be_valid
       end
-      it "パスワードが英数混合であれば登録できる" do
-        @user.password = "aaa000"
-        expect(@user).to be_valid
-      end
-      it "last_nameが全角かな文字であれば登録できる" do
-        @user.last_name = "あああ"
-        expect(@user).to be_valid
-      end
-      it "first_nameが全角かな文字であれば登録できる" do
-        @user.last_name = "あああ"
-        expect(@user).to be_valid
-      end
-      it "last_name_kanaが半角カナであれば登録できる" do
-        @user.last_name = "アアア"
-        expect(@user).to be_valid
-      end
-      it "first_name_kanaが半角カナであれば登録できる" do
-        @user.last_name = "アアア"
-        expect(@user).to be_valid
-      end
     end
-
+   
     context '新規登録がうまくいかないとき' do
       it "nicknameが空だと登録できない" do
         @user.nickname = ""
@@ -94,6 +74,31 @@ describe User do
         @user.birth_date = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
+      end
+      it "password:半角英数混合(半角英語のみ)" do
+        @user.password = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it "last_nameが全角かな文字でなければ登録できない" do
+        @user.last_name = "aaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name Last name full-width characters.")
+      end
+      it "first_nameが全角かな文字でなければ登録できない" do
+        @user.last_name = "aaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name Last name full-width characters.")
+      end
+      it "last_name_kanaが半角カナでなければ登録できない" do
+        @user.last_name_kana = "kana"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana Last name kana full-width katakana characters.")
+      end
+      it "first_name_kanaが半角カナでなければ登録できない" do
+        @user.first_name_kana = "kana"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana First name kana full-width katakana characters.")
       end
     end
   end
