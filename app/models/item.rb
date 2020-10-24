@@ -13,7 +13,7 @@ class Item < ApplicationRecord
             :prefecture_id, :heading_time_id, numericality: { other_than: 1 }
 
   validates :price, numericality: { only_integer: true, greater_than: 299 }
-  validates :price, numericality: { only_integer: true,less_than: 9999999 }
+  validates :price, numericality: { only_integer: true, less_than: 9_999_999 }
 
   with_options presence: true do
     validates :image
