@@ -12,7 +12,11 @@ class Item < ApplicationRecord
   validates :category_id, :condition_id, :post_payer_id,
             :prefecture_id, :heading_time_id, numericality: { other_than: 1 }
 
+  validates :price, numericality: { only_integer: true, greater_than: 299 }
+  validates :price, numericality: { only_integer: true,less_than: 9999999 }
+
   with_options presence: true do
+    validates :image
     validates :goods_name, length: { maximum: 40 }
     validates :description, length: { maximum: 1000 }
     validates :category_id
@@ -20,10 +24,6 @@ class Item < ApplicationRecord
     validates :post_payer_id
     validates :prefecture_id
     validates :heading_time_id
-    validates :price, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'Price Half-width number' },
-                      numericality: { only_integer: true, greater_than: 300, message: 'must be greater than 300' },
-                      numericality: { only_integer: true, less_than: 9_999_999, message: 'must be less than 9,999,999' }
-
-    validates :image
+    validates :price, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'Price Half-width number' }
   end
 end
