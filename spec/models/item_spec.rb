@@ -7,9 +7,6 @@ RSpec.describe Item, type: :model do
 
   describe '商品の出品' do
     context '商品の出品ができる場合' do
-      it '全てがあれば出品できる' do
-        expect(@item).to be_valid
-      end
       it 'goods_nameが40文字以下であれば出品できる' do
         @item.goods_name = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
         expect(@item).to be_valid
