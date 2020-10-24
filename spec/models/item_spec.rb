@@ -23,7 +23,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    context '商品の出品ができる場合' do
+    context '商品の出品ができない場合' do
       it 'goods_nameが空だと出品できない' do
         @item.goods_name = ''
         @item.valid?
