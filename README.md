@@ -18,7 +18,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchases
+- has_many :orders
 
 
 
@@ -39,11 +39,11 @@
 ### Association
 
 - belongs_to :user
-- has_one :purchase
+- has_one :order
 
 
 
-## purchases
+## orders
 
 |Column|Type        |Options                       |
 |------|------------|------------------------------|
@@ -54,7 +54,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :purchase
+- has_one :address
 
 
 
@@ -65,10 +65,11 @@
 | post_code     | string     | null:false                      |
 | prefecture_id | integer    | null:false                      |
 | city          | string     | null:false                      |
+| lot_number    | string     | null:false                      |
 | building_name | string     |
 | phone_number  | string     | null:false, unique:true         |
-| purchase      | references | foreign_key:true, null:false    |
+| order         | references | foreign_key:true, null:false    |
 
 ### Association
 
-- belongs_to :purchase
+- belongs_to :order
