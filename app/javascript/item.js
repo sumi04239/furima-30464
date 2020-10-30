@@ -1,6 +1,6 @@
 function item() {
-  const priceInput = document.getElementById("item-price");
-  priceInput.addEventListener("input", () => {
+  const priceInput = document.getElementById("sell-price");
+  priceInput.addEventListener("input", (e) => {
      const inputValue = priceInput.value;
 
      const addTaxDom = document.getElementById("add-tax-price");
@@ -8,7 +8,10 @@ function item() {
 
      const profitOutput = document.getElementById("profit");
      profitOutput.innerHTML = Math.floor(inputValue-addTaxDom.innerHTML);
+     
+     e.preventDefault();
   });
+  
 }
 
 setInterval(item, 1000);
