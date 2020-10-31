@@ -8,6 +8,7 @@ class Item < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   validates :category_id, :condition_id, :post_payer_id,
             :prefecture_id, :heading_time_id, numericality: { other_than: 1 }
