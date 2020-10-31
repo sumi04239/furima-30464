@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
 before_action :authenticate_user!, only: :index
 before_action :move_to_index
+before_action :sold_out 
+
 
   def index
     @item = Item.find(params[:item_id])
@@ -20,18 +22,24 @@ before_action :move_to_index
   end
 
   private
+
   def order_address_params
     params.require(:order_address).permit(:post_code, :prefecture_id, :city, :lot_number, :building_name, :phone_number, :number, :exp_month, :exp_year, :cvc,:price).merge(user_id: current_user.id, item_id: params[:item], token: params[:token])
   end
 
   def move_to_index
-    unless user_signed_in? 
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
       redirect_to root_path
     end
+  end
 
-    def set_item
-      @item = Item.find(params[:id])
+  def sold_out
+    @item = Item.find(params[:item_id])
+    if Order.where(item_id: @item.id).exists?
+      redirect_to root_path
     end
+  end
   
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
@@ -40,8 +48,8 @@ before_action :move_to_index
       card: order_address_params[:token],
       currency: 'jpy'
       )
-    end
   end
+  
 end
 
   
