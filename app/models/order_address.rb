@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :lot_number, :building_name, :phone_number, :user_id, :item_id,:order_id, :token
+  attr_accessor :post_code, :prefecture_id, :city, :lot_number, :building_name, :phone_number, :user_id, :item_id, :order_id, :token
 
   validates :prefecture_id, numericality: { other_than: 1 }
 

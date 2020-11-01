@@ -27,16 +27,12 @@ class OrdersController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-     if current_user.id == @item.user_id
-      redirect_to root_path
-     end
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def sold_out
     @item = Item.find(params[:item_id])
-    if Order.where(item_id: @item.id).exists?
-      redirect_to root_path 
-    end
+    redirect_to root_path if Order.where(item_id: @item.id).exists?
   end
 
   def pay_item
