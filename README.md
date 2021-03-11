@@ -15,7 +15,7 @@
 | first_name_kana    | string  | null:false            |
 | birth_date         | date    | null:false            |
 
-### Association
+## Association
 
 - has_many :items
 - has_many :orders
@@ -36,7 +36,7 @@
 | heading_time_id| integer    | null:false                  |
 | price          | integer    | null:false                  |
 
-### Association
+## Association
 
 - belongs_to :user
 - has_one :order
@@ -50,7 +50,7 @@
 | item | references | foreign_key:true, null:false |
 | user | references | foreign_key:true, null:false |
 
-### Association
+## Association
 
 - belongs_to :user
 - belongs_to :item
@@ -70,6 +70,6 @@
 | phone_number  | string     | null:false, unique:true         |
 | order         | references | foreign_key:true, null:false    |
 
-### Association
+## Association
 
 - belongs_to :order
